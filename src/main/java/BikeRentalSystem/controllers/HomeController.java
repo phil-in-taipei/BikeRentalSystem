@@ -16,10 +16,10 @@ public class HomeController {
         return "authentication/home";
     }
 
-    @GetMapping("/admin")
-    public String adminPage() {
-        return "authentication/admin";
-    }
+    //@GetMapping("/admin")
+    //public String adminPage() {
+    //    return "authentication/admin";
+   // }
 
     @GetMapping("/customer")
     public String superUPage() {

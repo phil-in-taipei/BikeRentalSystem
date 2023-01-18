@@ -1,4 +1,5 @@
 package BikeRentalSystem.services;
+import BikeRentalSystem.models.AuthorityEnum;
 import BikeRentalSystem.models.UserMeta;
 import BikeRentalSystem.models.UserPrincipal;
 import BikeRentalSystem.repositories.UserMetaRepo;
@@ -26,6 +27,17 @@ public class CustomUserService implements UserDetailsService {
         return userPrincipalRepo.findByUsername(username).orElseThrow(() ->
                 new UsernameNotFoundException("User not found with username or email : " + username)
         );
+    }
+
+    public List<UserPrincipal> getAllUsers() {
+        return userPrincipalRepo.findAll();
+    }
+
+    public List<UserPrincipal> getAllCustomers() {
+        //return userPrincipalRepo.findAllByAuthorities(
+        //        AuthorityEnum.ROLE_CUSTOMER
+        //);
+        return userPrincipalRepo.findByCustomerAuthority();
     }
 
 

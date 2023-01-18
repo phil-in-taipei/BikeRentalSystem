@@ -1,0 +1,7 @@
+
+# Query to get users by authority (3 is the id for the customer role enum)
+SELECT * FROM users u
+INNER JOIN user_authority_join_table ua ON u.id = ua.user_id
+INNER JOIN authorities a ON ua.authority_id = a.id
+WHERE a.id = 3;
+

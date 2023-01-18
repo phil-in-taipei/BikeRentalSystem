@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{authentication/fragments/layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Rental Bikes</title>
+</head>
+<body>
+    <div layout:fragment="content" th:remove="tag">
+        <div align="center">
+            <h1>Bicycles For Rent</h1>
+            <a th:href="@{/new-bike}">Submit A New Rental Bike</a><br/>
+            <a th:href="@{/admin}">Customer List</a>
+            <br/><br/>
+            <table border="1" cellpadding="10">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Color</th>
+                    <th>Brand</th>
+                    <th>Model</th>
+                    <th>Customer</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="bike : ${bikeList}">
+                    <td th:text="${bike.id}"></td>
+                    <td th:text="${bike.color}"></td>
+                    <td th:text="${bike.brand}"></td>
+                    <td th:text="${bike.model}"></td>
+                    <td th:text="${bike.user != null} ? ${bike.user.username}"></td>
+                                <!--<td th:text="${bike.customer.fullName}"></td> -->
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

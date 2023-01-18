@@ -7,34 +7,23 @@
 </head>
 <body>
 <div layout:fragment="content" th:remove="tag">
-    <h1>Admin Page</h1>
     <div align="center">
-        <h1>Customer List</h1>
-        <br/><a th:href="@{/new}">Add A New Customer</a><br/>
+        <h1>Admin Page</h1>
+        <hr>
+        <h3>Customer List</h3>
         <br/><a th:href="@{/bikes}">Rental Bicycles</a><br/>
         <table border="1" cellpadding="10">
             <thead>
             <tr>
-                <!--
-                You are creating a table here, where the header will be the Customer
-                details and then the other rows will be filled by the data that
-                you send back in the Model object.
-                -->
-                <th>Customer ID</th>
+                <th>Username</th>
                 <th>Full Name</th>
                 <th>Email Address</th>
                 <th>Age</th>
-                <!--<th>Address</th>
                 <th>Rental Bike</th>
-                <th>Actions</th> -->
+                <th>Actions</th>
             </tr>
             </thead>
-            <!--
-             Now that your headers are defined, you can reference the key-value
-             pair "customerList" that you added to the model above.
-             Thymeleaf will loop over each customer and extract the attributes to match
-             your column names.
-            -->
+
             <tbody>
             <tr th:each="customer : ${customerList}">
                 <td th:text="${customer.username}">Username</td>
@@ -43,19 +32,18 @@
                 </td>
                 <td th:text="${customer.userMeta.email}">Email Address</td>
                 <td th:text="${customer.userMeta.age}">Age</td>
-                <!--<td th:text="${customer.address}">Address</td>
                 <td th:text="${customer.bike}">Rental Bike</td>
-                <td><a th:href="@{'/edit/' + ${customer.id}}">Edit</a>,
-                    <a th:href="@{'/delete/' + ${customer.id}}">Delete</a>, -->
-                    <!--<a th:text="${(customer.bike == null) ? 'Delete' : ''}"
+                <td><!--<a th:href="@{'/edit/' + ${customer.id}}">Edit</a>,
+                    <a th:href="@{'/delete/' + ${customer.id}}">Delete</a>,
+                    <a th:text="${(customer.bike == null) ? 'Delete' : ''}"
                        th:href="@{'/bikes/delete/' + ${customer.id}}">
-                    </a>
+                    </a> -->
                     <a th:text="${(customer.bike == null) ? 'Assign Rental Bike' : ''}"
                        th:href="@{'/bikes/assign/' + ${customer.id}}">
                     </a>
-                    <a th:text="${(customer.bike != null) ? 'Delete' : ''}"
+                    <!--<a th:text="${(customer.bike != null) ? 'Delete' : ''}"
                        th:onclick="warning()">
-                    </a>
+                    </a> -->
                     <a th:text="${(customer.bike != null) ? 'Remove Rental Bike' : ''}"
                        th:href="${(customer.bike != null) ? '/unassign/' + customer.bike.getId() : ''}">
                     </a>

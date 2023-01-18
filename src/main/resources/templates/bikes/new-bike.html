@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{authentication/fragments/layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Submit New Bike</title>
+</head>
+<body>
+    <div layout:fragment="content" th:remove="tag">
+        <div align="center">
+            <h1>Submit A New Rental Bicycle</h1>
+            <br />
+            <form action="#" th:action="@{/bikes}" th:object="${bike}" method="post">
+                <table border="0" cellpadding="10">
+                    <tr>
+                        <td>Color:</td>
+                        <td><input type="text" th:field="*{color}" required/></td>
+                    </tr>
+                    <tr>
+                        <td>Brand:</td>
+                        <td><input type="text" th:field="*{brand}" required/></td>
+                    </tr>
+                    <tr>
+                        <td>Model:</td>
+                        <td><input type="text" th:field="*{model}" required/></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><button type="submit">Save</button>
+                            <button type="reset">Reset</button></td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

@@ -21,7 +21,7 @@ public class SecurityConfig {
                         .antMatchers("/js/**", "/css/**", "/img/**", "/webjars/**").permitAll()
                         //make sure that the admin page can only be accessed user with ROLE_ADMIN
                         .antMatchers("/admin").hasRole("ADMIN")
-                        //only allow users with ROLE_SUPERUSER to access the super user page
+                        .antMatchers("/new-bike").hasRole("ADMIN")
                         .antMatchers("/customer").hasRole("CUSTOMER")
                         //only allow users with an UPDATER authority to update users.
                         //.antMatchers("/update-user").hasAuthority("UPDATER")

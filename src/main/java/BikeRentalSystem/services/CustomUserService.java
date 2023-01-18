@@ -33,10 +33,12 @@ public class CustomUserService implements UserDetailsService {
         return userPrincipalRepo.findAll();
     }
 
+    public UserPrincipal getUser(Long id) {
+        return userPrincipalRepo.findById(id)
+                .orElse(null);
+    }
+
     public List<UserPrincipal> getAllCustomers() {
-        //return userPrincipalRepo.findAllByAuthorities(
-        //        AuthorityEnum.ROLE_CUSTOMER
-        //);
         return userPrincipalRepo.findByCustomerAuthority();
     }
 

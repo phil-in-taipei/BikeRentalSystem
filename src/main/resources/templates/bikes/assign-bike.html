@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{authentication/fragments/layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Rent Bike to Customer</title>
+</head>
+<body>
+    <div layout:fragment="content" th:remove="tag">
+        <div align="center">
+            <h1>Assign Bike to Customer</h1>
+            <a th:href="@{/admin}">Customer List</a>
+            <br />
+            <form action="#" th:action="@{/bikes/assign}" method="post">
+                <input type="hidden" name="userId" th:value="${user.id}"/>
+                <table border="0" cellpadding="10">
+                    <tr>
+                        <td>Customer Name: <strong><span th:text="${user.username}"></span></strong></td>
+                    </tr>
+                    <tr>
+                        <td>Customer Email: <strong><span th:text="${user.userMeta.email}"></span></strong></td>
+                    </tr>
+                    <tr>
+                        <td>Assign Rental Bike to Customer:
+                            <select class="form-select" th:name="bikeId">
+                                <option th:if="${bikeList.isEmpty()}">None Available</option>
+                                <option th:each="bike : ${bikeList}" th:value="${bike.id}" th:text="${bike.toString()}"></option>
+                            </select></td>
+                    </tr>
+                    <tr>
+                        <td><button type="submit" th:disabled="${bikeList.isEmpty()}">Save</button></td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

@@ -50,4 +50,7 @@ public class UserPrincipal implements UserDetails {
         credentialsNonExpired = true;
         enabled = true;
     }
+
+    @OneToOne(mappedBy = "user")
+    private RentalBike bike;
 }

@@ -9,36 +9,36 @@
 <body>
 <div layout:fragment="content" th:remove="tag">
   <div sec:authorize="hasRole('ROLE_CUSTOMER')" align="center">
-    <h2>Edit User Profile</h2>
+    <!--<h2>Edit User Profile</h2>
     <h3 th:text="${user.username} + ' (' + ${user.id} + ')'"></h3>
-    <div align="center">
-      <h1>Edit Customer</h1>
+    <div align="center"> -->
+      <h1>Edit Customer: <b th:inline="text"> [[${#httpServletRequest.remoteUser}]] </b></h1>
       <br />
-      <form action="#" th:action="@{'/update/' + ${customer.id}}" th:object="${customer}"
+      <form action="#" th:action="@{'/update-user-meta/' + ${userMeta.id}}" th:object="${userMeta}"
             method="post">
         <table border="0" cellpadding="10">
           <tr>
             <td>Customer ID:</td>
-            <td><input type="text" th:field="*{id}" readonly/></td>
+            <td><input type="text" class="form-control-plaintext"  th:field="*{id}" readonly/></td>
           </tr>
           <tr>
             <td>Customer Given Name:</td>
-            <td><input type="text" th:field="*{givenName}" required/></td>
+            <td><input class="form-control" type="text" th:field="*{givenName}" required/></td>
           </tr>
           <tr>
             <td>Customer Surname:</td>
-            <td><input type="text" th:field="*{surname}" required/></td>
+            <td><input class="form-control" type="text" th:field="*{surname}" required/></td>
           </tr>
           <tr>
             <td>Email Address:</td>
-            <td><input type="email" th:field="*{email}" required/></td>
+            <td><input class="form-control" type="email" th:field="*{email}" required/></td>
           </tr>
           <tr>
             <td>Age:</td>
-            <td><input type="number" th:field="*{age}" required/></td>
+            <td><input class="form-control" type="number" th:field="*{age}" required/></td>
           </tr>
           <tr>
-            <td colspan="2"><button type="submit">Save</button></td>
+            <td colspan="2"><button class="btn btn-secondary" type="submit">Save</button></td>
           </tr>
         </table>
       </form>

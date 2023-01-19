@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.security.RolesAllowed;
@@ -31,10 +34,12 @@ public class HomeController {
     //    return "authentication/admin";
    // }
 
+
+
     @GetMapping("/customer")
     public ModelAndView showUserMetaEditPage(Authentication authentication) {
         UserPrincipal user = (UserPrincipal) authentication.getPrincipal();
-        ModelAndView mav = new ModelAndView("edit-user-meta");
+        ModelAndView mav = new ModelAndView("authentication/edit-user-meta");
         UserMeta userMeta = user.getUserMeta();
         if (userMeta == null) {
             mav.setViewName("error");
@@ -43,8 +48,22 @@ public class HomeController {
                             + user.getId() + " does not exist."
             );
         } else {
-            mav.addObject("customer", userMeta);
+            mav.addObject("userMeta", userMeta);
         }
         return mav;//"authentication/customer";
+    }
+
+    @PostMapping("/update-user-meta/{id}")
+    public String updateUserMeta(
+            @PathVariable(name = "id") Long id,
+            @ModelAttribute("userMeta") UserMeta userMeta, Model model) {
+        if (!id.equals(userMeta.getId())) {
+            model.addAttribute("message",
+                    "Cannot update, customer id " + userMeta.getId()
+                            + " doesn't match id to be updated: " + id + ".");
+            return "error";
+        }
+        userDetailService.updateUserMeta(userMeta);
+        return "redirect:/";
     }
 }

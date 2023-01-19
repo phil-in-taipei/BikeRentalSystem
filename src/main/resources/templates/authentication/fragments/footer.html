@@ -8,6 +8,7 @@
     <div class="container">
         <span sec:authorize="isAuthenticated()">
                 Logged in user: <b th:inline="text"> [[${#httpServletRequest.remoteUser}]] </b>
+                <!--<span sec:authentication="principal.authorities">[ROLE_USER, ROLE_ADMIN]</span> -->
                 <a th:if="${#httpServletRequest.remoteUser !=null}" th:href="@{/logout}">Sign Out</a>
                 </span>
     </div>

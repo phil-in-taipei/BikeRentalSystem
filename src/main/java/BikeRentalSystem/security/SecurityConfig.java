@@ -31,7 +31,12 @@ public class SecurityConfig {
                 .httpBasic(Customizer.withDefaults())
                 //use a form to log in with the default login page
                 .formLogin();
-
+                //.formLogin(login -> login
+                //        .loginPage("/signin")
+                //        .defaultSuccessUrl("/"));;
+                //.logout(logout -> logout
+                //        .logoutUrl("/logout")
+                //        .logoutSuccessUrl("/login"));
         return http.build();
     }
 

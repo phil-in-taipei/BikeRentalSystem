@@ -5,13 +5,10 @@ import BikeRentalSystem.services.CustomUserService;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.security.RolesAllowed;
@@ -34,9 +31,14 @@ public class HomeController {
     //    return "authentication/admin";
    // }
 
+    @RequestMapping("/signin")
+    public String showLoginPage() {
+            return "authentication/signin";
+    }
 
 
-    @GetMapping("/customer")
+
+        @GetMapping("/customer")
     public ModelAndView showUserMetaEditPage(Authentication authentication) {
         UserPrincipal user = (UserPrincipal) authentication.getPrincipal();
         ModelAndView mav = new ModelAndView("authentication/edit-user-meta");
@@ -53,6 +55,7 @@ public class HomeController {
         return mav;//"authentication/customer";
     }
 
+    @PreAuthorize("#id == authentication.principal.userMeta.id")
     @PostMapping("/update-user-meta/{id}")
     public String updateUserMeta(
             @PathVariable(name = "id") Long id,

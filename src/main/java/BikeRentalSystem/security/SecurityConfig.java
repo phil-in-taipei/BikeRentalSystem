@@ -22,6 +22,7 @@ public class SecurityConfig {
                         //make sure that the admin page can only be accessed user with ROLE_ADMIN
                         .antMatchers("/admin").hasRole("ADMIN")
                         .antMatchers("/new-bike").hasRole("ADMIN")
+                        .antMatchers("/batch/**").hasRole("ADMIN")
                         .antMatchers("/customer").hasRole("CUSTOMER")
                         //only allow users with an UPDATER authority to update users.
                         //.antMatchers("/update-user").hasAuthority("UPDATER")
